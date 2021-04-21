@@ -1,65 +1,61 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-
+import SplashSignIn from "../components/Home/SplashSignIn"
 export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    return (
+        <div className="overflow-hidden">
+            <section className="relative">
+                {/* Illustration behind hero content */}
+                <div className="max-w-6xl mx-auto px-4 sm:px-6">
+                    {/* Hero content */}
+                    <div className="pt-16 pb-12 md:pt-40 md:pb-20">
+                        {/* Section header */}
+                        <div className="text-center pb-12 md:pb-16">
+                            <h1
+                                className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4"
+                                // data-aos="zoom-y-out"
+                            >
+                                {/* TODO: Placeholder name? */}
+                                Loadout Tracker
+                            </h1>
+                            <div className="max-w-3xl mx-auto">
+                                <p
+                                    className="text-xl text-gray-400 mb-8"
+                                    // data-aos="zoom-y-out"
+                                    // data-aos-delay="150"
+                                >
+                                    {/* TODO: Put a description here */}
+                                    Track loadouts during the current meta. No more hunting for the best setup!
+                                </p>
+                                <div
+                                    className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center"
+                                    // data-aos="zoom-y-out"
+                                    // data-aos-delay="300"
+                                >
+                                    <SplashSignIn />
+                                </div>
+                            </div>
+                        </div>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+                        {/* Hero image */}
+                        <div>
+                            <div
+                                className="relative flex justify-center mb-8"
+                                // data-aos="zoom-y-out"
+                                // data-aos-delay="450"
+                            >
+                                <div className="flex flex-col justify-center">
+                                    <img
+                                        className="mx-auto"
+                                        src="https://i.imgur.com/J7gPIGx.png"
+                                        width="800"
+                                        height="432"
+                                        alt="Hero"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+    );
 }
