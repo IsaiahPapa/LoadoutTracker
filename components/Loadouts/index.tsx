@@ -3,7 +3,7 @@ import { useState, useEffect, FC } from "react";
 import Spinner from "./Spinner";
 import { useRouter } from "next/router";
 
-import { AiFillCaretUp, AiFillCaretDown } from "react-icons/ai";
+import { FiChevronUp, FiChevronDown } from "react-icons/fi";
 
 export default function Loadouts() {
     let [categories, setCategories] = useState([]);
@@ -25,7 +25,7 @@ export default function Loadouts() {
     function countAttachments(obj: any): number {
         let count = 0;
         for (const prop in obj) {
-            if (obj[prop] !== null) {
+            if (obj[prop] !== undefined) {
                 count++;
             }
         }
@@ -54,6 +54,20 @@ export default function Loadouts() {
                     }
                 }
             }
+            case "lethal": {
+                for (let i = 0; i < fakeImagesApi.lethals.length; i++) {
+                    if (fakeImagesApi.lethals[i].name === name) {
+                        return fakeImagesApi.lethals[i].image;
+                    }
+                }
+            }
+            case "field": {
+                for (let i = 0; i < fakeImagesApi.fields.length; i++) {
+                    if (fakeImagesApi.fields[i].name === name) {
+                        return fakeImagesApi.fields[i].image;
+                    }
+                }
+            }
             default: {
                 console.log("Type: " + type + " not known");
                 return "";
@@ -76,31 +90,31 @@ export default function Loadouts() {
         votes: number;
         loadout: {
             primary: {
-                name: string | null;
+                name: string;
                 attachments: {
-                    muzzle: string | null;
-                    barrel: string | null;
-                    laser: string | null;
-                    optic: string | null;
-                    stock: string | null;
-                    underbarrel: string | null;
-                    ammunition: string | null;
-                    grip: string | null;
-                    perk: string | null;
+                    muzzle: string | undefined;
+                    barrel: string | undefined;
+                    laser: string | undefined;
+                    optic: string | undefined;
+                    stock: string | undefined;
+                    underbarrel: string | undefined;
+                    ammunition: string | undefined;
+                    grip: string | undefined;
+                    perk: string | undefined;
                 };
             };
             secondary: {
-                name: string | null;
+                name: string;
                 attachments: {
-                    muzzle: string | null;
-                    barrel: string | null;
-                    laser: string | null;
-                    optic: string | null;
-                    stock: string | null;
-                    trigger: string | null;
-                    ammunition: string | null;
-                    grip: string | null;
-                    perk: string | null;
+                    muzzle: string | undefined;
+                    barrel: string | undefined;
+                    laser: string | undefined;
+                    optic: string | undefined;
+                    stock: string | undefined;
+                    trigger: string | undefined;
+                    ammunition: string | undefined;
+                    grip: string | undefined;
+                    perk: string | undefined;
                 };
             };
             perks: string[];
@@ -113,13 +127,13 @@ export default function Loadouts() {
         primaries: [
             {
                 name: "Kilo 141",
-                image: "https://static.wikia.nocookie.net/callofduty/images/b/bf/Kilo_141_menu_icon_MW.png",
+                image: "https://www.callofduty.com/cdn/app/weapons/mw/icon_cac_weapon_ar_kilo433_mobile.png",
             },
         ],
         secondaries: [
             {
                 name: ".50 GS",
-                image: "https://static.wikia.nocookie.net/callofduty/images/e/e3/.50_GS_menu_icon_MW.png",
+                image: "https://www.callofduty.com/cdn/app/weapons/mw/icon_cac_weapon_pi_decho_mobile.png",
             },
         ],
         perks: [
@@ -136,6 +150,19 @@ export default function Loadouts() {
                 image: "https://i.imgur.com/k6qBRNE.png",
             },
         ],
+        lethals: [
+            {
+                name: "C4",
+                image: "https://static.wikia.nocookie.net/callofduty/images/d/d1/C4_menu_icon_MW3.png",
+            },
+        ],
+        fields: [
+            {
+                name: "Smoke Grenade",
+                image:
+                    "https://static.wikia.nocookie.net/callofduty/images/c/c3/Smoke_Grenade_menu_icon_MW3.png",
+            },
+        ],
     };
 
     let FakeCategoryApi = [
@@ -147,7 +174,7 @@ export default function Loadouts() {
         },
         {
             backgroundUrl: "https://i.imgur.com/huKaAII.png",
-            logoUrl: "https://i.imgur.com/EAsuFFt.png",
+            logoUrl: "https://i.imgur.com/F0i01ql.png",
             logoAlt: "Call of Duty: Modern Warfare",
             id: "cod-modern-warfare",
         },
@@ -163,13 +190,13 @@ export default function Loadouts() {
     let fakeLoadoutFeed = {
         game: {
             backgroundUrl: "https://i.imgur.com/huKaAII.png",
-            logoUrl: "https://i.imgur.com/EAsuFFt.png",
+            logoUrl: "https://i.imgur.com/F0i01ql.png",
             logoAlt: "Call of Duty: Modern Warfare",
             id: "cod-modern-warfare",
         },
         feed: [
             {
-                id: "NanoID_here_or_UUID4",
+                uuid: "NanoID_here_or_UUID4",
                 user: {
                     id: "Creati",
                     image:
@@ -182,27 +209,27 @@ export default function Loadouts() {
                         attachments: {
                             muzzle: "Monolithic Suppressor",
                             barrel: 'Singuard Arms 19.7" Prowler',
-                            laser: null,
+                            laser: undefined,
                             optic: "G.I. Mini Reflex",
-                            stock: null,
+                            stock: undefined,
                             underbarrel: "Commando Foregrip",
-                            ammunition: null,
+                            ammunition: undefined,
                             grip: "Rubberized Grip",
-                            perk: null,
+                            perk: undefined,
                         },
                     },
                     secondary: {
                         name: ".50 GS",
                         attachments: {
-                            muzzle: null,
-                            barrel: null,
-                            laser: null,
-                            optic: null,
-                            stock: null,
-                            trigger: null,
-                            ammunition: null,
-                            grip: null,
-                            perk: null,
+                            muzzle: undefined,
+                            barrel: undefined,
+                            laser: undefined,
+                            optic: undefined,
+                            stock: undefined,
+                            trigger: undefined,
+                            ammunition: undefined,
+                            grip: undefined,
+                            perk: undefined,
                         },
                     },
                     perks: ["Cold-Blooded", "Ghost", "Amped"],
@@ -219,6 +246,11 @@ export default function Loadouts() {
         router.push("/loadouts/" + id);
     };
 
+    const onLoadoutClick = (id: string) => {
+        // console.log(router.asPath);
+        router.push(router.asPath + "/" + id);
+    };
+
     useEffect(() => {
         const { game_id } = router.query;
         console.log(game_id);
@@ -233,9 +265,14 @@ export default function Loadouts() {
                 onCategoryClick(item.id);
             }}
             key={item.id}
+            className="cursor-pointer"
         >
             <li
-                className="w-full h-14 mb-2 flex"
+                className={`w-full h-14 mb-2 flex ${
+                    router.asPath === "/loadouts/" + encodeURIComponent(item.id)
+                        ? "border-4 border-blue-700"
+                        : ""
+                }`}
                 style={{
                     backgroundImage: `url(${item.backgroundUrl})`,
                     backgroundSize: "cover",
@@ -245,11 +282,6 @@ export default function Loadouts() {
                             : "grayscale(30%)"
                     }`,
                     backdropFilter: "blur(2px)",
-                    border: `${
-                        router.asPath === "/loadouts/" + encodeURIComponent(item.id)
-                            ? "solid 3px blue"
-                            : "unset"
-                    }`,
                 }}
             >
                 <img
@@ -265,7 +297,7 @@ export default function Loadouts() {
     let CategoryWrapper = ({ children }: { children: React.ReactNode }) => (
         <>
             <div
-                className="bg-night-800 p-2"
+                className="bg-night-800 p-2 flex-none"
                 style={{
                     width: "250px",
                 }}
@@ -286,12 +318,7 @@ export default function Loadouts() {
         //     <h2 className="text-center text-xl my-2 uppercase">Games</h2>
         //     <ul className="flex flex-col w-full h-96">{children}</ul>
         // </div>
-        <div
-            className="flex flex-col h-full bg-night-800 ml-6"
-            style={{
-                width: "55rem",
-            }}
-        >
+        <div className="flex flex-col h-full bg-night-800 ml-6">
             <div className="relative flex w-full h-20 overflow-hidden">
                 <img
                     className="absolute w-full h-full z-0"
@@ -310,46 +337,99 @@ export default function Loadouts() {
                     alt={fakeLoadoutFeed?.game?.logoAlt}
                 />
             </div>
-            <ul>{children}</ul>
+            <ul className="m-2">{children}</ul>
         </div>
     );
     const FeedItem = ({ item }: { item: FeedItemFromApi }) => (
         <a
             onClick={() => {
-                // onCategoryClick(item.id);
+                onLoadoutClick(item.id);
             }}
             key={item.id}
+            className="cursor-pointer"
         >
-            <li className="w-full h-14 py-1 mb-2 flex">
+            <li className="w-full h-20 py-1 mt-4 mb-2 flex bg-night-500 rounded-full gap-1">
                 <div className="flex w-1/12">
-                    <div className="mx-auto flex flex-col">
-                        <AiFillCaretUp />
-                        {item.votes}
-                        <AiFillCaretDown />
+                    <div className="m-auto flex flex-col">
+                        <FiChevronUp size="1.25rem" />
+                        <span>{item.votes}</span>
+                        <FiChevronDown size="1.25rem" />
                     </div>
                 </div>
-                <div className="w-2/12">
-                    <img src={findImageUrlFromName("primary", item.loadout.primary.name)} height="65px" />
-                    <br />
-                    {countAttachments(item.loadout.primary.attachments)}
+                <div className="w-2/12 relative flex">
+                    <img
+                        src={findImageUrlFromName("primary", item.loadout.primary.name)}
+                        alt={item.loadout.primary.name}
+                        className="object-contain mx-auto pb-4"
+                    />
+                    <span className="w-full text-center absolute bottom-0 text-gray-400">
+                        <span className="text-blue-500">
+                            {countAttachments(item.loadout.primary.attachments)}
+                        </span>
+                        x Attachments
+                    </span>
                 </div>
-                <div className="w-2/12">
-                    <img src={findImageUrlFromName("secondary", item.loadout.secondary.name)} height="65px" />
-                    <br />
-                    {countAttachments(item.loadout.secondary.attachments)}
+                <div className="w-2/12 relative flex">
+                    <img
+                        src={findImageUrlFromName("secondary", item.loadout.secondary.name)}
+                        alt={item.loadout.secondary.name}
+                        className="object-contain mx-auto pb-4"
+                    />
+                    <span className="w-full text-center absolute bottom-0 text-gray-400">
+                        <span className="text-blue-500">
+                            {countAttachments(item.loadout.secondary.attachments)}
+                        </span>
+                        x Attachments
+                    </span>
                 </div>
-                <div className="w-1/12">
-                    <img src={findImageUrlFromName("perk", item.loadout.perks[0])} height="65px" />
+                <div className="w-1/12 relative flex">
+                    <img
+                        className="object-contain mx-auto"
+                        src={findImageUrlFromName("perk", item.loadout.perks[0])}
+                        alt={item.loadout.perks[0]}
+                        height="65px"
+                    />
                 </div>
-                <div className="w-1/12">
-                    <img src={findImageUrlFromName("perk", item.loadout.perks[1])} />
+                <div className="w-1/12 relative flex">
+                    <img
+                        className="object-contain mx-auto"
+                        src={findImageUrlFromName("perk", item.loadout.perks[1])}
+                        alt={item.loadout.perks[1]}
+                    />
                 </div>
-                <div className="w-1/12">
-                    <img src={findImageUrlFromName("perk", item.loadout.perks[2])} />
+                <div className="w-1/12 relative flex">
+                    <img
+                        className="object-contain mx-auto"
+                        src={findImageUrlFromName("perk", item.loadout.perks[2])}
+                        alt={item.loadout.perks[2]}
+                    />
                 </div>
-                <div className="w-1/12">{item.loadout.lethal[0]}</div>
-                <div className="w-1/12">{item.loadout.field[0]}</div>
-                <div className="w-2/12"></div>
+                <div className="w-1/12 relative flex">
+                    <img
+                        src={findImageUrlFromName("lethal", item.loadout.lethal[0])}
+                        alt={item.loadout.lethal[0]}
+                        className="object-contain mx-auto"
+                    />
+                </div>
+                <div className="w-1/12 relative flex">
+                    <img
+                        src={findImageUrlFromName("field", item.loadout.field[0])}
+                        alt={item.loadout.field[0]}
+                        className="object-contain mx-auto"
+                    />
+                </div>
+                <div className="w-2/12 relative flex">
+                    <div className="m-auto w-full">
+                        <img
+                            src={item.user.image}
+                            alt={item.user.id}
+                            className="mx-auto rounded-full h-12 w-12 flex items-center justify-center border-2 border-blue-600"
+                        />
+                        <span className="flex mx-auto uppercase items-center justify-center">
+                            {item.user.id}
+                        </span>
+                    </div>
+                </div>
             </li>
         </a>
     );
@@ -361,7 +441,17 @@ export default function Loadouts() {
                     Loadouts
                 </span>
             </h2>
-            <div className="flex flex-row font-inter h-full">
+            <div className="flex flex-col font-inter h-full">
+                <div className="text-gray-400 bg-night-800 p-4 my-4">
+                    <h3 className="text-2xl font-bold text-white">Share your loadout!</h3>
+                    <p>
+                        With the launch of this new site, ALL FEATURES & VOICES will be TEMPORARILY available
+                        to everyone. An audit will happen later, and if you are not a{" "}
+                        <span className="text-yellow-400">Supporter</span> using a{" "}
+                        <span className="text-yellow-400">Supporter</span> tagged voice or feature it will be
+                        removed and/or changed without notice.
+                    </p>
+                </div>
                 <div className="flex mx-auto">
                     <CategoryWrapper>
                         {FakeCategoryApi.map((fakeItem) => {
@@ -369,8 +459,19 @@ export default function Loadouts() {
                         })}
                     </CategoryWrapper>
                     <FeedWrapper>
-                        {fakeLoadoutFeed.feed.map((fakeItem) => {
-                            return <FeedItem item={fakeItem} />;
+                        {fakeLoadoutFeed.feed.map((fakeItem: any) => {
+                            return (
+                                <>
+                                    <FeedItem item={fakeItem} />
+                                    <FeedItem item={fakeItem} />
+                                    <FeedItem item={fakeItem} />
+                                    <FeedItem item={fakeItem} />
+                                    <FeedItem item={fakeItem} />
+                                    <FeedItem item={fakeItem} />
+                                    <FeedItem item={fakeItem} />
+                                    <FeedItem item={fakeItem} />
+                                </>
+                            );
                         })}
                     </FeedWrapper>
                 </div>
